@@ -10,16 +10,19 @@ function Todoform(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // props.onSubmit({
-    //   text: input,
-    // });
+    props.onSubmit({
+      // The code below generates a random number of 10000 so their are no duplicates
+      id: Math.floor(Math.random() * 10000),
+      // The code below is literally just the text input
+      text: input,
+    });
     setInput("");
   };
   return (
     <form className="todo-form" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="add a to-do, you fool"
+        placeholder="itinerary"
         value={input}
         name="text"
         className="todo-input"
