@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Todoform from "./Todoform";
+import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 
-function Todolist() {
+function TodoList() {
   const [todos, setTodos] = useState([]);
-
+  // Adding todos to the array. *If there is no text then return to the original stat
+  // or if there is hella white space condense to the text by removing spaces
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
@@ -14,22 +15,22 @@ function Todolist() {
 
     setTodos(newTodo);
   };
-
+  // Updating todos
   const updateTodo = (todoId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return;
     }
-
+    // Setting todos
     setTodos((prev) =>
       prev.map((item) => (item.id === todoId ? newValue : item))
     );
   };
-
+  // Removing todos
   const removeTodo = (id) => {
     const removeArr = [...todos].filter((todo) => todo.id !== id);
     setTodos(removeArr);
   };
-
+  // Completing todos
   const completeTodo = (id) => {
     let updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
@@ -42,9 +43,9 @@ function Todolist() {
   return (
     <div>
       <h3>What't the plan for today?</h3>
-      <Todoform onSubmit={addTodo} />
+      <TodoForm onSubmit={addTodo} />
       <Todo
-        todo={todos}
+        todos={todos}
         completeTodo={completeTodo}
         removeTodo={removeTodo}
         updateTodo={updateTodo}
@@ -55,4 +56,4 @@ function Todolist() {
 
 // Imported the To do form function
 
-export default Todolist;
+export default TodoList;
